@@ -4,7 +4,11 @@ import { SingleColorSlider } from '../components/SingleColorSlider'
 
 const IndexPage = () => {
   return (
-    <SingleColorSlider initialValue={30} />
+    <main>
+      <SingleColorSlider color="R" initialValue={100} />
+      <SingleColorSlider color="G" initialValue={100} />
+      <SingleColorSlider color="B" initialValue={100} />
+    </main>
   )
 }
 
