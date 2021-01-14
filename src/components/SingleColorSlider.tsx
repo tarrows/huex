@@ -19,6 +19,8 @@ export type Props = {
   initialValue?: number
   // onChangeEnd: (val: number) => void
   color: 'R' | 'G' | 'B'
+  value?: number
+  onChange?: (val: number) => void
 }
 
 export const SingleColorSlider: React.FC<Props> = (props) => {
@@ -30,22 +32,23 @@ export const SingleColorSlider: React.FC<Props> = (props) => {
 
   const handleChange = (value: number) => {
     setCurrent(value)
+    props?.onChange(value)
   }
 
   const bg = (color: string) => (val: number) => {
     switch (color) {
       case 'R':
-        return `rgba(${val},0,0,0.6)`
+        return `rgba(${val},0,0,0.7)`
       case 'G':
-        return `rgba(0,${val},0,0.6)`
+        return `rgba(0,${val},0,0.7)`
       case 'B':
-        return `rgba(0,0,${val},0.6)`
+        return `rgba(0,0,${val},0.7)`
     }
   }
 
   return (
     <Flex>
-      <Center w="40px" h="40px" bg={bg(color)(current)} color="white">
+      <Center w="40px" h="40px" mx="2rem" bg={bg(color)(current)} color="white">
         <Box as="span" fontWeight="bold" fontSize="lg">{color}</Box>
       </Center>
       <Slider flex="1" value={current} min={minValue} max={maxValue} onChange={handleChange}>
@@ -54,7 +57,7 @@ export const SingleColorSlider: React.FC<Props> = (props) => {
         </SliderTrack>
         <SliderThumb />
       </Slider>
-      <NumberInput maxW="100px" mr="2rem" value={current} min={minValue} max={maxValue} onChange={(_, num) => handleChange(num)}>
+      <NumberInput maxW="100px" mx="2rem" value={current} min={minValue} max={maxValue} onChange={(_, num) => handleChange(num)}>
         <NumberInputField />
         <NumberInputStepper>
           <NumberIncrementStepper />
