@@ -32,7 +32,9 @@ export const SingleColorSlider: React.FC<Props> = (props) => {
 
   const handleChange = (value: number) => {
     setCurrent(value)
-    props?.onChange(value)
+    if (props.onChange) {
+      props.onChange(value)
+    }
   }
 
   const bg = (color: string) => (val: number) => {
